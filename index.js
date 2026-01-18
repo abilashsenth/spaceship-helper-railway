@@ -129,9 +129,13 @@ function connect() {
     console.log('✅ Connected to Polymarket WebSocket');
     reconnectAttempts = 0;
     
-    subscriptions.forEach(tokenId => {
-      subscribe(tokenId);
-    });
+    // Batch subscribe to all tokens at once (fixes INVALID OPERATION errors)
+    const tokenList = Array.from(subscriptions);
+    if (tokenList.length > 0) {
+      const msg = { assets_ids: tokenList, type: 'market' };
+      console.log(`📡 Batch subscribing to ${tokenList.length} tokens`);
+      ws.send(JSON.stringify(msg));
+    }
   });
   
   ws.on('message', async (data) => {
