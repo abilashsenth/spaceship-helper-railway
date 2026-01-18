@@ -1,0 +1,16 @@
+{
+  "name": "polymarket-ws-listener",
+  "version": "1.0.0",
+  "description": "WebSocket listener for Polymarket CLOB - pushes real-time data to Upstash Redis",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.7",
+    "ws": "^8.18.0"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
